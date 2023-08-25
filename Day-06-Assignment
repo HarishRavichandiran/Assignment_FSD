@@ -1,0 +1,67 @@
+1.Get all the countries from Asia continent /region using Filter function
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const responsedata = JSON.parse(xhr.responseText)
+    const countr2 = responsedata.filter(country => country.region === 'Asia');
+    console.log('Countries in Asia:', countr2);
+  }
+};
+xhr.send();
+
+2.Get all the countries with a population of less than 2 lakhs using Filter function
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const responsedata = JSON.parse(xhr.responseText)
+    const countr2 = responsedata.filter(country => country.population < 200000);
+    console.log('Countries with less than 2 lakh pop', countr2);
+  }
+};
+xhr.send();
+
+3.Print the following details name, capital, flag using forEach function
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const responsedata = JSON.parse(xhr.responseText)
+    responsedata.forEach(country => {
+        console.log(country.name.common)
+        console.log(country.capital)
+        console.log(country.flags.png)
+    });
+  }
+};
+xhr.send();
+
+4.Print the total population of countries using reduce function
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const responsedata = JSON.parse(xhr.responseText)
+    const total = responsedata.reduce((acc ,country) => acc + country.population, 0)
+    console.log("total population of the countries", total)
+  }
+};
+xhr.send();
+
+5. country which uses US dollars as currency 
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const responsedata = JSON.parse(xhr.responseText)
+    const USD = responsedata.find(country => country.currencies && country.currencies.USD);
+    console.log("Countries uses USD", USD)
+  }
+};
+xhr.send();
